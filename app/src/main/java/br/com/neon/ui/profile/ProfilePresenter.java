@@ -22,6 +22,11 @@ public class ProfilePresenter implements ProfileContract.Presenter {
         this.view = view;
     }
 
+    ProfilePresenter(ProfileContract.View view, User user) {
+        this.view = view;
+        this.user = user;
+    }
+
     @Override
     public void onCreate() {
         NeonApplication.getInstance().getComponent().inject(this);

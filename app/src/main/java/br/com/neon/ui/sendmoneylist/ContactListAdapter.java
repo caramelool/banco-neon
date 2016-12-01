@@ -80,7 +80,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
         ContactViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.contact_adapter, parent, false));
+                    .inflate(R.layout.adapter_contact, parent, false));
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             context = itemView.getContext();

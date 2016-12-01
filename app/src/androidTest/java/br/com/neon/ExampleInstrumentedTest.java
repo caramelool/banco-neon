@@ -7,6 +7,8 @@ import static android.support.test.espresso.Espresso.*;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 
 import static android.support.test.espresso.assertion.ViewAssertions.*;
+
+import static android.support.test.espresso.action.ViewActions.*;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -28,6 +30,11 @@ public class ExampleInstrumentedTest {
     public void before() {
 //        Context context = InstrumentationRegistry.getTargetContext();
         activityTestRule.launchActivity(null);
+    }
+
+    @Test
+    public void test_send_money() {
+        onView(withId(R.id.send_money_button)).perform(click());
     }
 
     void sleep(long time) {

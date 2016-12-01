@@ -23,10 +23,11 @@ public class ApiModule {
 
     @Provides
     Retrofit provideRetrofit(@Named("api_base_url") String url) {
+        int time = 10;
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(time, TimeUnit.SECONDS)
+                .readTimeout(time, TimeUnit.SECONDS)
+                .writeTimeout(time, TimeUnit.SECONDS)
                 .build();
 
         return new Retrofit.Builder()

@@ -9,6 +9,7 @@ import br.com.neon.di.module.ContactModule;
 import br.com.neon.di.module.MeModule;
 import br.com.neon.model.Contact;
 import br.com.neon.ui.profile.ProfilePresenter;
+import br.com.neon.ui.sendmoneydetail.SendMoneyDetailPresenter;
 import br.com.neon.ui.sendmoneylist.SendMoneyListPresenter;
 import dagger.Component;
 
@@ -24,4 +25,6 @@ public interface ApplicationComponent {
     void inject(ProfilePresenter presenter);
 
     void inject(SendMoneyListPresenter presenter);
+
+    void inject(SendMoneyDetailPresenter sendMoneyDetailPresenter);
 }

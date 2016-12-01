@@ -2,13 +2,19 @@ package br.com.neon.ui.sendmoneylist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -17,10 +23,13 @@ import br.com.neon.model.Contact;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
 import br.com.neon.ui.itemdecoration.DividerItemDecoration;
+import br.com.neon.ui.sendmoneydetail.OnSendMoneyListener;
+import br.com.neon.ui.sendmoneydetail.SendMoneyDetailFragment;
 import butterknife.BindView;
 
 public class SendMoneyListActivity extends BaseActivity
-        implements SendMoneyListContract.View, ContactListAdapter.OnContactSelectListener {
+        implements SendMoneyListContract.View, ContactListAdapter.OnContactSelectListener,
+        OnSendMoneyListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -30,6 +39,8 @@ public class SendMoneyListActivity extends BaseActivity
     ProgressBar loadingProgress;
     @BindView(R.id.error_view)
     LinearLayout errorView;
+    @BindView(R.id.container)
+    FrameLayout container;
 
 
     private SendMoneyListContract.Presenter presenter;
@@ -83,7 +94,43 @@ public class SendMoneyListActivity extends BaseActivity
 
     @Override
     public void onContactSelect(Contact contact) {
+        SendMoneyDetailFragment.newInstance(contact).show(this);
+    }
 
+    @Override
+    public void onSendMoney(boolean sent) {
+        int message;
+        int color;
+        int buttonColor;
+        if (sent) {
+            message = R.string.message_transfer_success;
+            color = R.color.persian_green;
+            buttonColor = R.color.cello;
+        } else {
+            message = R.string.message_transfer_fail;
+            color = android.R.color.holo_red_dark;
+            buttonColor = R.color.bon_jour;
+        }
+        final Snackbar snackbar = Snackbar.make(container, message, Snackbar.LENGTH_LONG);
+        snackbar.setAction(android.R.string.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+
+        View view = snackbar.getView();
+        view.setBackgroundResource(color);
+
+        TextView text = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        text.setTextColor(ContextCompat.getColor(this, R.color.bon_jour));
+        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+
+        Button action = (Button) view.findViewById(android.support.design.R.id.snackbar_action);
+        action.setTextColor(ContextCompat.getColor(this, buttonColor));
+        action.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+
+        snackbar.show();
     }
 
     @Override

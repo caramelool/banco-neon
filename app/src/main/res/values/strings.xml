@@ -2,9 +2,21 @@
     <string name="app_name">Neon</string>
     <string name="action_settings">Settings</string>
 
+    <string name="fake_name">Leleco</string>
+    <string name="fake_phone">(11) 1111&#8211;1111</string>
+    <string name="fake_money">R$ 9.999,99</string>
+
     <string name="title_send_money_list">Enviar Dinheiro</string>
+    <string name="title_value_to_send">Valor a enviar:</string>
+
+    <string name="hint_send_value">R$ 0,00</string>
+
+    <string name="message_transfer_success">Transferencia realizada com sucesso!!!</string>
+    <string name="message_transfer_fail">Ouve um problema ao realizar sua transferencia!!!</string>
 
     <string name="button_try_again">Tentar Novamente</string>
     <string name="button_send_money">Enviar Dinheiro</string>
+    <string name="button_send">Enviar</string>
     <string name="button_send_history">Histórico de envios</string>
+
 </resources>

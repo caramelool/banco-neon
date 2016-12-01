@@ -21,14 +21,13 @@ public class ProfilePresenterTest {
     @Mock
     ProfileContract.View view;
 
-    private ProfilePresenter presenter;
+    private ProfileContract.Presenter presenter;
 
     @Before
     public void before() {
         initMocks(this);
 
-        presenter = spy(new ProfilePresenter(view));
-        presenter.user = user;
+        presenter = spy(new ProfilePresenter(view, user));
 
         doNothing().when(presenter).requestToken();
     }
