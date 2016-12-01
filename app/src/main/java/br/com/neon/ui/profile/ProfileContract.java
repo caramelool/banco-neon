@@ -5,8 +5,10 @@ import br.com.neon.ui.BasePresenter;
 
 interface ProfileContract {
     interface Presenter extends BasePresenter{
+        void onResume();
         void requestToken();
         void processToken(String token);
+        boolean hasToken();
     }
     interface View {
         void showLoading();

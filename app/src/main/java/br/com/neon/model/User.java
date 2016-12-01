@@ -1,5 +1,7 @@
 package br.com.neon.model;
 
+import android.text.TextUtils;
+
 public class User {
     private String nome;
     private String email;
@@ -27,6 +29,10 @@ public class User {
 
     public String getToken() {
         return token;
+    }
+
+    public boolean hasToken() {
+        return !TextUtils.isEmpty(token);
     }
 
     public void updateToken(String token) {

@@ -1,6 +1,5 @@
 package br.com.neon.ui.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import br.com.neon.MainActivity;
 import br.com.neon.R;
 import br.com.neon.model.User;
 import br.com.neon.ui.BaseActivity;
@@ -66,7 +64,7 @@ public class ProfileActivity extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.requestToken();
+        presenter.onResume();
     }
 
     @Override
@@ -107,7 +105,6 @@ public class ProfileActivity extends BaseActivity
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.send_history_button:
-                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.try_again_button: {
                 presenter.requestToken();

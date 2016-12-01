@@ -29,17 +29,21 @@ public class ProfilePresenterTest {
 
         presenter = spy(new ProfilePresenter(view));
         presenter.user = user;
+
+        doNothing().when(presenter).requestToken();
     }
 
     @Test
-    public void token_received_fail() {
+    public void test_token_received_fail() {
         presenter.processToken(null);
+
         verify(view).onTokenErrorReceiver();
+
         assertEquals(null, user.getToken());
     }
 
     @Test
-    public void token_received_success() {
+    public void test_token_received_success() {
         final String mockToken = "mock_token";
         doAnswer(new Answer() {
             @Override
@@ -54,5 +58,14 @@ public class ProfilePresenterTest {
         verify(view).onTokenReceiver(user);
 
         assertEquals(mockToken, user.getToken());
+    }
+
+    @Test
+    public void test_not_call_request_token_if_exists_a_token() {
+        doReturn(true).when(presenter).hasToken();
+
+        presenter.onResume();
+
+        verify(presenter, never()).requestToken();
     }
 }
