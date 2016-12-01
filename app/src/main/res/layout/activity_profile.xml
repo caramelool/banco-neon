@@ -27,7 +27,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/neon_background"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -90,22 +89,16 @@
                 android:text="@string/button_send_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/neon_button"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textAllCaps="true"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                style="@style/Neon.Button"/>
 
             <Button
                 android:id="@+id/send_history_button"
                 android:text="@string/button_send_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/neon_button"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textAllCaps="true"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                style="@style/Neon.Button"/>
 
         </LinearLayout>
 

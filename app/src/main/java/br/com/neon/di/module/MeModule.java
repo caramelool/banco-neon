@@ -20,6 +20,6 @@ public class MeModule {
     @Singleton
     @Provides
     User provideUser(@Named("me_image_url") String imageUrl) {
-        return new User("Lucas Caramelo", "lucascaramelo@gmail.com", imageUrl, null);
+        return new User("Lucas Caramelo", "lucascaramelo@gmail.com", imageUrl);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.neon.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import br.com.neon.R;
 import br.com.neon.model.User;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
+import br.com.neon.ui.sendmoneylist.SendMoneyListActivity;
 import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,7 +83,7 @@ public class ProfileActivity extends BaseActivity
                 .load(user.getImageUrl())
                 .transform(new CircleTransform())
                 .into(userImageView);
-        userNameTextView.setText(user.getNome());
+        userNameTextView.setText(user.getName());
         userEmailTextView.setText(user.getEmail());
 
         errorView.setVisibility(View.GONE);
@@ -100,11 +102,13 @@ public class ProfileActivity extends BaseActivity
 
     @OnClick({
             R.id.send_history_button,
+            R.id.send_money_button,
             R.id.try_again_button
     })
     void onClick(View view) {
         switch (view.getId()) {
-            case R.id.send_history_button:
+            case R.id.send_money_button:
+                startActivity(new Intent(this, SendMoneyListActivity.class));
                 break;
             case R.id.try_again_button: {
                 presenter.requestToken();

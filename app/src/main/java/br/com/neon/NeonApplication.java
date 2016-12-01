@@ -5,6 +5,7 @@ import android.app.Application;
 import br.com.neon.di.component.ApplicationComponent;
 import br.com.neon.di.component.DaggerApplicationComponent;
 import br.com.neon.di.module.ApiModule;
+import br.com.neon.di.module.ContactModule;
 import br.com.neon.di.module.MeModule;
 
 public class NeonApplication extends Application {
@@ -29,6 +30,7 @@ public class NeonApplication extends Application {
             applicationComponent = DaggerApplicationComponent.builder()
                     .apiModule(new ApiModule())
                     .meModule(new MeModule())
+                    .contactModule(new ContactModule())
                     .build();
         }
         return applicationComponent;

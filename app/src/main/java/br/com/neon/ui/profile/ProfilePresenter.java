@@ -42,7 +42,7 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     @Override
     public void requestToken() {
         view.showLoading();
-        Call<String> call = neonApi.generateToken(user.getNome(), user.getEmail());
+        Call<String> call = neonApi.generateToken(user.getName(), user.getEmail());
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

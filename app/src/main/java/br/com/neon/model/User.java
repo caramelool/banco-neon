@@ -3,20 +3,26 @@ package br.com.neon.model;
 import android.text.TextUtils;
 
 public class User {
-    private String nome;
+    private String name;
     private String email;
     private String imageUrl;
     private String token;
 
-    public User(String nome, String email, String imageUrl, String token) {
-        this.nome = nome;
+    public User(String name, String email, String imageUrl) {
+        this.name = name;
+        this.email = email;
+        this.imageUrl = imageUrl;
+    }
+
+    public User(String name, String email, String imageUrl, String token) {
+        this.name = name;
         this.email = email;
         this.imageUrl = imageUrl;
         this.token = token;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {

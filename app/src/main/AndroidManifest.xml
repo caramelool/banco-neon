@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.sendmoneylist.SendMoneyListActivity"
+            android:label="@string/title_send_money_list"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
