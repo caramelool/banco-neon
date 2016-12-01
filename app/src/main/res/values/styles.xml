@@ -17,4 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Neon" parent="AppTheme"/>
+
+    <style name="Neon.Button" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/neon_background</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
