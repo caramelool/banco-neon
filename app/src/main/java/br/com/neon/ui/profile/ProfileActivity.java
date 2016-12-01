@@ -1,5 +1,6 @@
 package br.com.neon.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -11,12 +12,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import br.com.neon.MainActivity;
 import br.com.neon.R;
 import br.com.neon.model.User;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
 import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ProfileActivity extends BaseActivity
         implements ProfileContract.View {
@@ -58,7 +61,11 @@ public class ProfileActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         setSupportActionBar(toolbar);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.requestToken();
     }
 
@@ -91,5 +98,20 @@ public class ProfileActivity extends BaseActivity
         profileContainer.setVisibility(View.GONE);
         buttonContainer.setVisibility(View.GONE);
         loadingProgress.setVisibility(View.GONE);
+    }
+
+    @OnClick({
+            R.id.send_history_button,
+            R.id.try_again_button
+    })
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.send_history_button:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.try_again_button: {
+                presenter.requestToken();
+            }
+        }
     }
 }
