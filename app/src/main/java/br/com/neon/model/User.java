@@ -29,6 +29,10 @@ public class User {
         return email;
     }
 
+    public boolean hasImageUrl() {
+        return !TextUtils.isEmpty(imageUrl);
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }

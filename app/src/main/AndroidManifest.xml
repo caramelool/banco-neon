@@ -14,7 +14,8 @@
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,13 @@
         <activity
             android:name=".ui.sendmoneylist.SendMoneyListActivity"
             android:label="@string/title_send_money_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.transferhistory.TransferHistoryActivity"
+            android:label="@string/title_send_money_list"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -87,12 +87,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
 
         void bind(Contact contact) {
-            Picasso.with(context)
-                    .load(contact.getImageUrl())
-                    .placeholder(R.drawable.ic_contact)
-                    .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
-                    .transform(new CircleTransform())
-                    .into(contactImageView);
+            if (contact.hasImageUrl()) {
+                Picasso.with(context)
+                        .load(contact.getImageUrl())
+                        .placeholder(R.drawable.ic_contact)
+                        .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
+                        .transform(new CircleTransform())
+                        .into(contactImageView);
+            } else {
+                contactImageView.setImageResource(R.drawable.ic_contact);
+            }
 
             contactNameTextView.setText(contact.getName());
             contactPhoneTextView.setText(contact.getPhone());

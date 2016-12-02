@@ -8,6 +8,7 @@ import br.com.neon.di.module.ApiModule;
 import br.com.neon.di.module.ContactModule;
 import br.com.neon.di.module.MeModule;
 import br.com.neon.model.Contact;
+import br.com.neon.ui.transferhistory.TransferHistoryPresenter;
 import br.com.neon.ui.profile.ProfilePresenter;
 import br.com.neon.ui.sendmoneydetail.SendMoneyDetailPresenter;
 import br.com.neon.ui.sendmoneylist.SendMoneyListPresenter;
@@ -26,7 +27,7 @@ public interface ApplicationComponent {
 
     void inject(SendMoneyListPresenter presenter);
 
-    void inject(SendMoneyDetailPresenter sendMoneyDetailPresenter);
+    void inject(SendMoneyDetailPresenter presenter);
 
-
+    void inject(TransferHistoryPresenter presenter);
 }

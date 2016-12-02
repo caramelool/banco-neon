@@ -17,6 +17,7 @@ import br.com.neon.model.User;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
 import br.com.neon.ui.sendmoneylist.SendMoneyListActivity;
+import br.com.neon.ui.transferhistory.TransferHistoryActivity;
 import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -79,10 +80,16 @@ public class ProfileActivity extends BaseActivity
 
     @Override
     public void onTokenReceiver(User user) {
-        Picasso.with(this)
-                .load(user.getImageUrl())
-                .transform(new CircleTransform())
-                .into(userImageView);
+        if (user.hasImageUrl()) {
+            Picasso.with(this)
+                    .load(user.getImageUrl())
+                    .placeholder(R.drawable.ic_contact)
+                    .transform(new CircleTransform())
+                    .into(userImageView);
+        } else {
+            userImageView.setImageResource(R.drawable.ic_contact);
+        }
+
         userNameTextView.setText(user.getName());
         userEmailTextView.setText(user.getEmail());
 
@@ -109,6 +116,9 @@ public class ProfileActivity extends BaseActivity
         switch (view.getId()) {
             case R.id.send_money_button:
                 startActivity(new Intent(this, SendMoneyListActivity.class));
+                break;
+            case R.id.send_history_button:
+                startActivity(new Intent(this, TransferHistoryActivity.class));
                 break;
             case R.id.try_again_button: {
                 presenter.requestToken();

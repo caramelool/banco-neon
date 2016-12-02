@@ -8,6 +8,7 @@
 
     <string name="title_send_money_list">Enviar Dinheiro</string>
     <string name="title_value_to_send">Valor a enviar:</string>
+    <string name="title_transfer_history">Histórico de envios</string>
 
     <string name="hint_send_value">R$ 0,00</string>
 

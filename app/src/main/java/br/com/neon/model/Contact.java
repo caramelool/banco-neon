@@ -2,6 +2,7 @@ package br.com.neon.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -19,7 +20,7 @@ public class Contact implements Parcelable {
     @SerializedName("image_url")
     private String imageUrl;
     @SerializedName("transfer")
-    private float transfer;
+    private double transfer;
 
     public Contact() {
     }
@@ -30,7 +31,7 @@ public class Contact implements Parcelable {
         phone = in.readString();
         email = in.readString();
         imageUrl = in.readString();
-        transfer = in.readFloat();
+        transfer = in.readDouble();
     }
 
     public String getId() {
@@ -49,11 +50,15 @@ public class Contact implements Parcelable {
         return email;
     }
 
+    public boolean hasImageUrl() {
+        return !TextUtils.isEmpty(imageUrl);
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public float getTransfer() {
+    public double getTransfer() {
         return transfer;
     }
 
@@ -62,6 +67,9 @@ public class Contact implements Parcelable {
                 .format(transfer);
     }
 
+    public void setTransfer(double transfer) {
+        this.transfer = transfer;
+    }
 
     @Override
     public int describeContents() {
@@ -75,7 +83,7 @@ public class Contact implements Parcelable {
         dest.writeString(phone);
         dest.writeString(email);
         dest.writeString(imageUrl);
-        dest.writeFloat(transfer);
+        dest.writeDouble(transfer);
     }
 
     public static final Parcelable.Creator<Contact> CREATOR = new Parcelable.Creator<Contact>() {

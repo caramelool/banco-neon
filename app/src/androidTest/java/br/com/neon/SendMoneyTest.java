@@ -33,13 +33,17 @@ public class SendMoneyTest {
 
     @Test
     public void test_send_money_success() {
+        int position = 14;
         sleep(1000);
         onView(withId(R.id.try_again_button)).check(matches(isClickable()));
         sleep(500);
         onView(withId(R.id.send_money_button)).perform(click());
         sleep(500);
         onView(withId(R.id.recycler_view)).perform(
-                actionOnItemAtPosition(0, click()));
+                scrollToPosition(position));
+        sleep(500);
+        onView(withId(R.id.recycler_view)).perform(
+                actionOnItemAtPosition(position, click()));
         sleep(500);
         onView(withId(R.id.value_edit_text))
                 .perform(typeText("100.20"), closeSoftKeyboard());
