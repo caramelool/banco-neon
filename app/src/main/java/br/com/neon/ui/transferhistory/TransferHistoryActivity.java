@@ -2,11 +2,13 @@ package br.com.neon.ui.transferhistory;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -33,7 +35,7 @@ public class TransferHistoryActivity extends BaseActivity
     @BindView(R.id.history_recycler_view)
     RecyclerView historyRecyclerView;
     @BindView(R.id.recycler_container)
-    LinearLayout recyclerContainer;
+    NestedScrollView recyclerContainer;
     @BindView(R.id.loading_progress)
     ProgressBar loadingProgress;
     @BindView(R.id.error_view)
@@ -67,6 +69,8 @@ public class TransferHistoryActivity extends BaseActivity
 
         showLoading();
         presenter.processHistory(new ArrayList<TransferHistory>());
+
+//TODO always returning 400
 //        presenter.requestHistory();
     }
 
@@ -93,6 +97,15 @@ public class TransferHistoryActivity extends BaseActivity
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         historyGraphicRecyclerView.setHasFixedSize(true);
         historyGraphicRecyclerView.setAdapter(graphicAdapter = new GraphicAdapter());
+        historyGraphicRecyclerView.setNestedScrollingEnabled(false);
+        historyGraphicRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                historyGraphicRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                graphicAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void initHistory() {
@@ -101,6 +114,7 @@ public class TransferHistoryActivity extends BaseActivity
         historyRecyclerView.setHasFixedSize(true);
         historyRecyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.neon_line));
         historyRecyclerView.setAdapter(adapter = new ContactListAdapter(true));
+        historyRecyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override

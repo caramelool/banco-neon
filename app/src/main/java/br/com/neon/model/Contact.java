@@ -59,11 +59,14 @@ public class Contact implements Parcelable {
     }
 
     public double getTransfer() {
+        //TODO MOCK
         if (transfer == -1) {
             if (id.equals("2")) {
-                return 200.00;
+                return 90.90;
             } else if (id.equals("3")) {
-                return 100.00;
+                return 320.10;
+            } else if (id.equals("10")) {
+                return 402.00;
             }
             return 0;
         }

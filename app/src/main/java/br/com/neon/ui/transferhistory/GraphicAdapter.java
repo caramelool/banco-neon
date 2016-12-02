@@ -1,11 +1,9 @@
 package br.com.neon.ui.transferhistory;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,12 +91,9 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
         }
 
         private void updateLine() {
-            graphicLine.getLayoutParams().height = 0;
-            if (getAdapterPosition() == RecyclerView.NO_POSITION) {
-                return;
-            }
             try {
-                Contact contact = contactList.get(getAdapterPosition());
+                int position = getAdapterPosition();
+                Contact contact = contactList.get(position);
 
                 int height = itemView.getHeight()
                         - contactImageView.getHeight()

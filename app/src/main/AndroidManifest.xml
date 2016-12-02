@@ -29,7 +29,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.transferhistory.TransferHistoryActivity"
-            android:label="@string/title_send_money_list"
+            android:label="@string/title_transfer_history"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
     </application>

@@ -104,6 +104,14 @@ public class NeonAppInteractionTest {
                 .perform(click());
 
         sleep(500);
+        onView(withId(R.id.history_graphic_recycler_view))
+                .perform(scrollToPosition(14));
+
+        sleep(500);
+        onView(withId(R.id.history_graphic_recycler_view))
+                .perform(scrollToPosition(0));
+
+        sleep(500);
         onView(withId(R.id.history_recycler_view))
                 .perform(scrollToPosition(14));
 
