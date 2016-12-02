@@ -34,24 +34,28 @@ public class NeonAppInteractionTest {
     @Test
     public void test_happy_interaction() {
         sleep(1000);
-        onView(withId(R.id.try_again_button)).check(matches(isClickable()));
+        onView(withId(R.id.try_again_button))
+                .check(matches(isClickable()));
 
         sleep(500);
-        onView(withId(R.id.send_money_button)).perform(click());
+        onView(withId(R.id.send_money_button))
+                .perform(click());
 
         sleep(500);
         onView(withId(R.id.recycler_view)).perform(
                 actionOnItemAtPosition(1, click()));
 
         sleep(500);
-        onView(withId(R.id.close_image_button)).perform(click());
+        onView(withId(R.id.close_image_button))
+                .perform(click());
 
         sleep(500);
-        onView(withId(R.id.recycler_view)).perform(
-                actionOnItemAtPosition(3, click()));
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItemAtPosition(3, click()));
 
         sleep(500);
-        onView(withId(R.id.send_button)).perform(click());
+        onView(withId(R.id.send_button))
+                .perform(click());
 
         sleep(500);
         onView(withText(R.string.message_transfer_success))
@@ -61,22 +65,24 @@ public class NeonAppInteractionTest {
                 .check(matches(isDisplayed()));
 
         sleep(500);
-        onView(withId(android.support.design.R.id.snackbar_action)).perform(click());
+        onView(withId(android.support.design.R.id.snackbar_action))
+                .perform(click());
 
         sleep(500);
         onView(withId(R.id.recycler_view)).perform(
                 scrollToPosition(14));
 
         sleep(500);
-        onView(withId(R.id.recycler_view)).perform(
-                actionOnItemAtPosition(14, click()));
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItemAtPosition(14, click()));
 
         sleep(500);
         onView(withId(R.id.value_edit_text))
                 .perform(typeText("100.20"), closeSoftKeyboard());
 
         sleep(500);
-        onView(withId(R.id.send_button)).perform(click());
+        onView(withId(R.id.send_button))
+                .perform(click());
 
         sleep(500);
         onView(withText(R.string.message_transfer_success))
@@ -86,24 +92,28 @@ public class NeonAppInteractionTest {
                 .check(doesNotExist());
 
         sleep(500);
-        onView(withId(android.support.design.R.id.snackbar_action)).perform(click());
+        onView(withId(android.support.design.R.id.snackbar_action))
+                .perform(click());
 
         sleep(500);
-        onView(withContentDescription("Navigate up")).perform(click());
+        onView(withContentDescription("Navigate up"))
+                .perform(click());
 
         sleep(500);
-        onView(withId(R.id.send_history_button)).perform(click());
+        onView(withId(R.id.send_history_button))
+                .perform(click());
 
         sleep(500);
-        onView(withId(R.id.history_recycler_view)).perform(
-                scrollToPosition(14));
+        onView(withId(R.id.history_recycler_view))
+                .perform(scrollToPosition(14));
 
         sleep(500);
-        onView(withId(R.id.history_recycler_view)).perform(
-                scrollToPosition(0));
+        onView(withId(R.id.history_recycler_view))
+                .perform(scrollToPosition(0));
 
         sleep(500);
-        onView(withContentDescription("Navigate up")).perform(click());
+        onView(withContentDescription("Navigate up"))
+                .perform(click());
 
         sleep(500);
     }
