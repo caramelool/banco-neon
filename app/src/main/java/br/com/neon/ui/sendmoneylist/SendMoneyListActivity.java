@@ -22,6 +22,7 @@ import br.com.neon.R;
 import br.com.neon.model.Contact;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
+import br.com.neon.ui.contact.ContactListAdapter;
 import br.com.neon.ui.itemdecoration.DividerItemDecoration;
 import br.com.neon.ui.sendmoneydetail.OnSendMoneyListener;
 import br.com.neon.ui.sendmoneydetail.SendMoneyDetailFragment;

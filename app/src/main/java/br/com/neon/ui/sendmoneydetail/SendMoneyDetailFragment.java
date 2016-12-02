@@ -125,6 +125,12 @@ public class SendMoneyDetailFragment extends DialogFragment
         containerLoading.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void hideLoading() {
+        setCancelable(true);
+        containerLoading.setVisibility(View.GONE);
+    }
+
     @OnClick({
             R.id.close_image_button,
             R.id.send_button
@@ -142,19 +148,30 @@ public class SendMoneyDetailFragment extends DialogFragment
     }
 
     private void initContract() {
-        containerLoading.setVisibility(View.GONE);
-        if (getArguments() != null) {
+        try {
+            hideLoading();
             contact = getArguments().getParcelable(KEY_CONTACT);
 
-            Picasso.with(getContext())
-                    .load(contact.getImageUrl())
-                    .placeholder(R.drawable.ic_contact)
-                    .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
-                    .transform(new CircleTransform())
-                    .into(contactImageView);
+            if (contact == null) {
+                onSendMoneyError();
+                return;
+            }
+
+            if (contact.hasImageUrl()) {
+                Picasso.with(getContext())
+                        .load(contact.getImageUrl())
+                        .placeholder(R.drawable.ic_contact)
+                        .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
+                        .transform(new CircleTransform())
+                        .into(contactImageView);
+            } else {
+                contactImageView.setImageResource(R.drawable.ic_contact);
+            }
 
             contactNameTextView.setText(contact.getName());
             contactPhoneTextView.setText(contact.getPhone());
+        } catch (Exception e) {
+            onSendMoneyError();
         }
     }
 

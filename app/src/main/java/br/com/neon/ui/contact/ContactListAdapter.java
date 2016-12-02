@@ -1,4 +1,4 @@
-package br.com.neon.ui.sendmoneylist;
+package br.com.neon.ui.contact;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

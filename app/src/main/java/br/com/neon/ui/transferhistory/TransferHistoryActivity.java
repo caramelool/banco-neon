@@ -19,7 +19,7 @@ import br.com.neon.model.TransferHistory;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
 import br.com.neon.ui.itemdecoration.DividerItemDecoration;
-import br.com.neon.ui.sendmoneylist.ContactListAdapter;
+import br.com.neon.ui.contact.ContactListAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 

@@ -12,5 +12,6 @@ public interface SendMoneyDetailContract {
         void onSendMoneyError();
         void onSendMoneySuccess();
         void showLoading();
+        void hideLoading();
     }
 }
