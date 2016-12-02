@@ -20,7 +20,7 @@ public class Contact implements Parcelable {
     @SerializedName("image_url")
     private String imageUrl;
     @SerializedName("transfer")
-    private double transfer;
+    private double transfer = - 1;
 
     public Contact() {
     }
@@ -59,12 +59,20 @@ public class Contact implements Parcelable {
     }
 
     public double getTransfer() {
+        if (transfer == -1) {
+            if (id.equals("2")) {
+                return 200.00;
+            } else if (id.equals("3")) {
+                return 100.00;
+            }
+            return 0;
+        }
         return transfer;
     }
 
     public String getTransferFormatted() {
         return DecimalFormat.getCurrencyInstance()
-                .format(transfer);
+                .format(getTransfer());
     }
 
     public void setTransfer(double transfer) {

@@ -102,14 +102,17 @@ public class TransferHistoryPresenter implements TransferHistoryContract.Present
 
     @Override
     public List<Contact> getListForGraphic() {
-        List<Contact> contactList = new ArrayList<>(this.contactList);
+        List<Contact> contactList = new ArrayList<>();
+        contactList.addAll(this.contactList);
         Collections.sort(contactList, new Comparator<Contact>() {
             @Override
             public int compare(Contact contact, Contact t1) {
                 if (contact.getTransfer() > t1.getTransfer()) {
-                    return 0;
-                } else {
+                    return -1;
+                } else if (contact.getTransfer() < t1.getTransfer()){
                     return 1;
+                } else {
+                    return 0;
                 }
             }
         });

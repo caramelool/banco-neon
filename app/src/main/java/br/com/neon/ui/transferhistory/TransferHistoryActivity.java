@@ -23,7 +23,8 @@ import br.com.neon.ui.contact.ContactListAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TransferHistoryActivity extends BaseActivity implements TransferHistoryContract.View {
+public class TransferHistoryActivity extends BaseActivity
+        implements TransferHistoryContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,6 +42,7 @@ public class TransferHistoryActivity extends BaseActivity implements TransferHis
 
     private TransferHistoryContract.Presenter presenter;
     private ContactListAdapter adapter;
+    private GraphicAdapter graphicAdapter;
 
     @Override
     protected int layout() {
@@ -87,6 +89,10 @@ public class TransferHistoryActivity extends BaseActivity implements TransferHis
     }
 
     private void initGraphic() {
+        historyGraphicRecyclerView.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        historyGraphicRecyclerView.setHasFixedSize(true);
+        historyGraphicRecyclerView.setAdapter(graphicAdapter = new GraphicAdapter());
     }
 
     private void initHistory() {
@@ -108,6 +114,10 @@ public class TransferHistoryActivity extends BaseActivity implements TransferHis
     public void onHistoryReceiver(List<Contact> contactList) {
 
         adapter.updateData(contactList);
+
+        graphicAdapter.updateData(
+                presenter.getListForGraphic(),
+                (int) presenter.maxTransfer());
 
         loadingProgress.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
