@@ -27,4 +27,6 @@ public interface ApplicationComponent {
     void inject(SendMoneyListPresenter presenter);
 
     void inject(SendMoneyDetailPresenter sendMoneyDetailPresenter);
+
+
 }
