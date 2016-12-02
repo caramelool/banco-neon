@@ -41,10 +41,27 @@ public class NeonAppInteractionTest {
 
         sleep(500);
         onView(withId(R.id.recycler_view)).perform(
-                actionOnItemAtPosition(3, click()));
+                actionOnItemAtPosition(1, click()));
 
         sleep(500);
         onView(withId(R.id.close_image_button)).perform(click());
+
+        sleep(500);
+        onView(withId(R.id.recycler_view)).perform(
+                actionOnItemAtPosition(3, click()));
+
+        sleep(500);
+        onView(withId(R.id.send_button)).perform(click());
+
+        sleep(500);
+        onView(withText(R.string.message_transfer_success))
+                .check(doesNotExist());
+
+        onView(withText(R.string.message_transfer_fail))
+                .check(matches(isDisplayed()));
+
+        sleep(500);
+        onView(withId(android.support.design.R.id.snackbar_action)).perform(click());
 
         sleep(500);
         onView(withId(R.id.recycler_view)).perform(
@@ -67,6 +84,9 @@ public class NeonAppInteractionTest {
 
         onView(withText(R.string.message_transfer_fail))
                 .check(doesNotExist());
+
+        sleep(500);
+        onView(withId(android.support.design.R.id.snackbar_action)).perform(click());
 
         sleep(500);
         onView(withContentDescription("Navigate up")).perform(click());
