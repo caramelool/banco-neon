@@ -15,6 +15,7 @@ import java.util.List;
 
 import br.com.neon.R;
 import br.com.neon.model.Contact;
+import br.com.neon.ui.custom.ProfileImageView;
 import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,7 +69,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         implements View.OnClickListener {
 
         @BindView(R.id.contact_image_view)
-        ImageView contactImageView;
+        ProfileImageView contactImageView;
         @BindView(R.id.contact_name_text_view)
         TextView contactNameTextView;
         @BindView(R.id.contact_phone_text_view)
@@ -87,17 +88,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
 
         void bind(Contact contact) {
-            if (contact.hasImageUrl()) {
-                Picasso.with(context)
-                        .load(contact.getImageUrl())
-                        .placeholder(R.drawable.ic_contact)
-                        .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
-                        .transform(new CircleTransform())
-                        .into(contactImageView);
-            } else {
-                contactImageView.setImageResource(R.drawable.ic_contact);
-            }
-
+            contactImageView.setContact(contact);
             contactNameTextView.setText(contact.getName());
             contactPhoneTextView.setText(contact.getPhone());
 

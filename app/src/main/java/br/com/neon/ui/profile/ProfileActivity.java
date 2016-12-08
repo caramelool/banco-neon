@@ -16,6 +16,7 @@ import br.com.neon.R;
 import br.com.neon.model.User;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
+import br.com.neon.ui.custom.ProfileImageView;
 import br.com.neon.ui.sendmoneylist.SendMoneyListActivity;
 import br.com.neon.ui.transferhistory.TransferHistoryActivity;
 import br.com.neon.ui.transform.CircleTransform;
@@ -28,7 +29,7 @@ public class ProfileActivity extends BaseActivity
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.user_image_view)
-    ImageView userImageView;
+    ProfileImageView userImageView;
     @BindView(R.id.user_name_text_view)
     TextView userNameTextView;
     @BindView(R.id.user_email_text_view)
@@ -80,15 +81,7 @@ public class ProfileActivity extends BaseActivity
 
     @Override
     public void onTokenReceiver(User user) {
-        if (user.hasImageUrl()) {
-            Picasso.with(this)
-                    .load(user.getImageUrl())
-                    .placeholder(R.drawable.ic_contact)
-                    .transform(new CircleTransform())
-                    .into(userImageView);
-        } else {
-            userImageView.setImageResource(R.drawable.ic_contact);
-        }
+        userImageView.setUser(user);
 
         userNameTextView.setText(user.getName());
         userEmailTextView.setText(user.getEmail());

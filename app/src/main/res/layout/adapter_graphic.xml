@@ -31,9 +31,8 @@
         android:layout_above="@+id/contact_image_view"
         android:layout_centerInParent="true"/>
 
-    <ImageView
+    <br.com.neon.ui.custom.ProfileImageView
         android:id="@+id/contact_image_view"
-        android:src="@drawable/ic_contact"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_above="@+id/contact_name_text_view"

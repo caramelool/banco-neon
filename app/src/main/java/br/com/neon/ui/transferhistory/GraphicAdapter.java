@@ -14,6 +14,8 @@ import java.util.List;
 
 import br.com.neon.R;
 import br.com.neon.model.Contact;
+import br.com.neon.ui.custom.ProfileImageView;
+import br.com.neon.ui.custom.ResizeAnimation;
 import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,34 +58,23 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
         @BindView(R.id.graphic_line)
         ImageView graphicLine;
         @BindView(R.id.contact_image_view)
-        ImageView contactImageView;
+        ProfileImageView contactImageView;
         @BindView(R.id.contact_name_text_view)
         TextView contactNameTextView;
         @BindView(R.id.contact_transfer_text_view)
         TextView contactTransferTextView;
 
-        private Context context;
+        private boolean animated;
 
         GraphicViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_graphic, parent, false));
             ButterKnife.bind(this, itemView);
-            context = itemView.getContext();
         }
 
         void bind(Contact contact) {
-            if (contact.hasImageUrl()) {
-                int resize = R.dimen.contact_circle_graphic_resize;
-                Picasso.with(context)
-                        .load(contact.getImageUrl())
-                        .placeholder(R.drawable.ic_contact)
-                        .resizeDimen(resize, resize)
-                        .transform(new CircleTransform())
-                        .into(contactImageView);
-            } else {
-                contactImageView.setImageResource(R.drawable.ic_contact);
-            }
-
+            contactImageView.setContact(contact);
+            contactImageView.setTextView(14);
             contactNameTextView.setText(contact.getName());
             contactTransferTextView.setText(contact.getTransferFormatted());
 
@@ -102,7 +93,18 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
 
                 int percentTransfer = (int) ((contact.getTransfer() / maxValue) * 100);
                 int lineHeight = ((height * percentTransfer) / 100);
-                graphicLine.getLayoutParams().height = lineHeight;
+                if (animated) {
+                    graphicLine.getLayoutParams().height = lineHeight;
+                } else {
+                    animated = lineHeight > 0;
+                    ResizeAnimation resizeAnimation = new ResizeAnimation(
+                            graphicLine,
+                            lineHeight,
+                            0
+                    );
+                    resizeAnimation.setDuration(1200);
+                    graphicLine.startAnimation(resizeAnimation);
+                }
             } catch (Exception e) {
                 graphicLine.getLayoutParams().height = 0;
             }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/neon_profile_circle"
+        android:layout_gravity="center"
+        android:padding="1dp">
+
+        <TextView
+            android:text="LC"
+            android:id="@+id/profile_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/Neon.TextView"/>
+
+        <ImageView
+            android:src="@drawable/ic_contact"
+            android:id="@+id/profile_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@null" />
+
+    </FrameLayout>
+
+
+</merge>
