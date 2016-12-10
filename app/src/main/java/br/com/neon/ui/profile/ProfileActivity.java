@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import br.com.neon.R;
 import br.com.neon.model.User;
@@ -19,7 +16,6 @@ import br.com.neon.ui.BasePresenter;
 import br.com.neon.ui.custom.ProfileImageView;
 import br.com.neon.ui.sendmoneylist.SendMoneyListActivity;
 import br.com.neon.ui.transferhistory.TransferHistoryActivity;
-import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.OnClick;
 

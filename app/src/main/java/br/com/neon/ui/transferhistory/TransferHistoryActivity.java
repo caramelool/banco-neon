@@ -12,16 +12,14 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.neon.R;
 import br.com.neon.model.Contact;
-import br.com.neon.model.TransferHistory;
 import br.com.neon.ui.BaseActivity;
 import br.com.neon.ui.BasePresenter;
-import br.com.neon.ui.itemdecoration.DividerItemDecoration;
 import br.com.neon.ui.contact.ContactListAdapter;
+import br.com.neon.ui.itemdecoration.DividerItemDecoration;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -67,11 +65,7 @@ public class TransferHistoryActivity extends BaseActivity
         initGraphic();
         initHistory();
 
-        showLoading();
-        presenter.processHistory(new ArrayList<TransferHistory>());
-
-//TODO always returning 400
-//        presenter.requestHistory();
+        presenter.requestHistory();
     }
 
     @Override
@@ -98,14 +92,6 @@ public class TransferHistoryActivity extends BaseActivity
         historyGraphicRecyclerView.setHasFixedSize(true);
         historyGraphicRecyclerView.setAdapter(graphicAdapter = new GraphicAdapter());
         historyGraphicRecyclerView.setNestedScrollingEnabled(false);
-        historyGraphicRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                historyGraphicRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                graphicAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
     private void initHistory() {
@@ -136,6 +122,15 @@ public class TransferHistoryActivity extends BaseActivity
         loadingProgress.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
         recyclerContainer.setVisibility(View.VISIBLE);
+
+        historyGraphicRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        historyGraphicRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        graphicAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     @Override

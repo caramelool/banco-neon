@@ -57,20 +57,20 @@ public class ProfilePresenter implements ProfileContract.Presenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                if (view != null) {
-                    processToken(null);
-                }
+                processToken(null);
             }
         });
     }
 
     @Override
     public void processToken(String token) {
-        if (token != null) {
-            user.updateToken(token);
-            view.onTokenReceiver(user);
-        } else {
-            view.onTokenErrorReceiver();
+        if (view != null) {
+            if (token != null) {
+                user.updateToken(token);
+                view.onTokenReceiver(user);
+            } else {
+                view.onTokenErrorReceiver();
+            }
         }
     }
 

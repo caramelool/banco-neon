@@ -11,15 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import br.com.neon.R;
 import br.com.neon.model.Contact;
+import br.com.neon.ui.custom.ProfileImageView;
 import br.com.neon.ui.sendmoneylist.SendMoneyListActivity;
-import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,7 +28,7 @@ public class SendMoneyDetailFragment extends DialogFragment
     private static final String KEY_CONTACT = "key_contact";
 
     @BindView(R.id.contact_image_view)
-    ImageView contactImageView;
+    ProfileImageView contactImageView;
     @BindView(R.id.contact_name_text_view)
     TextView contactNameTextView;
     @BindView(R.id.contact_phone_text_view)
@@ -157,17 +154,7 @@ public class SendMoneyDetailFragment extends DialogFragment
                 return;
             }
 
-            if (contact.hasImageUrl()) {
-                Picasso.with(getContext())
-                        .load(contact.getImageUrl())
-                        .placeholder(R.drawable.ic_contact)
-                        .resizeDimen(R.dimen.contact_circle_resize, R.dimen.contact_circle_resize)
-                        .transform(new CircleTransform())
-                        .into(contactImageView);
-            } else {
-                contactImageView.setImageResource(R.drawable.ic_contact);
-            }
-
+            contactImageView.setContact(contact);
             contactNameTextView.setText(contact.getName());
             contactPhoneTextView.setText(contact.getPhone());
         } catch (Exception e) {

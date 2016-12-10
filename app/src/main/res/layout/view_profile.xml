@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/neon_profile_circle"
         android:layout_gravity="center"
-        android:padding="1dp">
+        android:padding="2dp">
 
         <TextView
             android:text="LC"

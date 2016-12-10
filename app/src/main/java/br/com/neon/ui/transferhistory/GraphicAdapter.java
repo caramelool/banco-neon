@@ -1,13 +1,10 @@
 package br.com.neon.ui.transferhistory;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +13,13 @@ import br.com.neon.R;
 import br.com.neon.model.Contact;
 import br.com.neon.ui.custom.ProfileImageView;
 import br.com.neon.ui.custom.ResizeAnimation;
-import br.com.neon.ui.transform.CircleTransform;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicViewHolder> {
 
-    private List<Contact> contactList;
+    private List<ContactView> contactList;
     private int maxValue;
 
     public GraphicAdapter() {
@@ -37,8 +33,8 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
 
     @Override
     public void onBindViewHolder(GraphicViewHolder holder, int position) {
-        Contact contact = contactList.get(position);
-        holder.bind(contact);
+        ContactView contactView = contactList.get(position);
+        holder.bind(contactView, maxValue);
     }
 
     @Override
@@ -47,13 +43,43 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
     }
 
     public void updateData(List<Contact> contactList, int maxValue) {
-        this.maxValue = maxValue + 100;
+        this.maxValue = maxValue;
         this.contactList.clear();
-        this.contactList.addAll(contactList);
+        this.contactList.addAll(ContactView.fromContactList(contactList));
         notifyDataSetChanged();
     }
 
-    class GraphicViewHolder extends RecyclerView.ViewHolder {
+    private static class ContactView {
+        private Contact contact;
+        private boolean animated;
+
+        ContactView(Contact contact) {
+            this.contact = contact;
+            this.animated = false;
+        }
+
+        public Contact getContact() {
+            return contact;
+        }
+
+        boolean isAnimated() {
+            return animated;
+        }
+
+        void setAnimated(boolean animated) {
+            this.animated = animated;
+        }
+
+        static List<ContactView> fromContactList(List<Contact> list) {
+            List<ContactView> viewList = new ArrayList<>();
+            for (Contact contact : list) {
+                viewList.add(new ContactView(contact));
+            }
+            return viewList;
+        }
+    }
+
+    static class GraphicViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.graphic_line)
         ImageView graphicLine;
@@ -64,7 +90,8 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
         @BindView(R.id.contact_transfer_text_view)
         TextView contactTransferTextView;
 
-        private boolean animated;
+        private ContactView contactView;
+        private int maxValue;
 
         GraphicViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext())
@@ -72,20 +99,20 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Contact contact) {
-            contactImageView.setContact(contact);
+        void bind(ContactView contactView, int maxValue) {
+            this.contactView = contactView;
+            this.maxValue = maxValue;
+            contactImageView.setContact(contactView.getContact());
             contactImageView.setTextView(14);
-            contactNameTextView.setText(contact.getName());
-            contactTransferTextView.setText(contact.getTransferFormatted());
+            contactNameTextView.setText(contactView.getContact().getName());
+            contactTransferTextView.setText(contactView.getContact().getTransferFormatted());
 
             updateLine();
         }
 
         private void updateLine() {
             try {
-                int position = getAdapterPosition();
-                Contact contact = contactList.get(position);
-
+                Contact contact = contactView.getContact();
                 int height = itemView.getHeight()
                         - contactImageView.getHeight()
                         - contactNameTextView.getHeight()
@@ -93,17 +120,17 @@ public class GraphicAdapter extends RecyclerView.Adapter<GraphicAdapter.GraphicV
 
                 int percentTransfer = (int) ((contact.getTransfer() / maxValue) * 100);
                 int lineHeight = ((height * percentTransfer) / 100);
-                if (animated) {
+                if (contactView.isAnimated()) {
                     graphicLine.getLayoutParams().height = lineHeight;
                 } else {
-                    animated = lineHeight > 0;
                     ResizeAnimation resizeAnimation = new ResizeAnimation(
                             graphicLine,
                             lineHeight,
                             0
                     );
-                    resizeAnimation.setDuration(1200);
+                    resizeAnimation.setDuration(1000);
                     graphicLine.startAnimation(resizeAnimation);
+                    contactView.setAnimated(lineHeight > 0);
                 }
             } catch (Exception e) {
                 graphicLine.getLayoutParams().height = 0;
