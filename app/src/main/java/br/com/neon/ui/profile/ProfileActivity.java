@@ -59,12 +59,13 @@ public class ProfileActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         setSupportActionBar(toolbar);
+
+        presenter.requestToken();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
     }
 
     @Override

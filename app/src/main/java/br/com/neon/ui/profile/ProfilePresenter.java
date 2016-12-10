@@ -38,13 +38,6 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     }
 
     @Override
-    public void onResume() {
-        if (!hasToken()) {
-            requestToken();
-        }
-    }
-
-    @Override
     public void requestToken() {
         view.showLoading();
         Call<String> call = neonApi.generateToken(user.getName(), user.getEmail());
